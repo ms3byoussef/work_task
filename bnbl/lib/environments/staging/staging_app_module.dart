@@ -1,3 +1,5 @@
+import 'package:bnbl/core/remote_files/abstract_remote_file_manager.dart';
+import 'package:bnbl/core/remote_files/remote_file_manager.dart';
 import 'package:bnbl/environments/staging/staging_environment.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -10,11 +12,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 @module
 abstract class StagingAppModule {
   @LazySingleton(env: [Environment.dev])
-  @LazySingleton(env: [Environment.dev])
   Dio dioStaging(StagingEnvironment environment) {
     final dio = Dio(
       BaseOptions(
         baseUrl: environment.devBaseUrl,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       ),
     );
 
@@ -31,6 +35,13 @@ abstract class StagingAppModule {
       enabled: kDebugMode,
     ));
 
+    // Interceptor to add partner_token to every request
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      // options.headers['Authorization'] = 'Bearer $partnerToken';
+      options.headers['partner_token'] = "";
+      options.headers['language'] = 'en';
+      return handler.next(options);
+    }));
     // dio.interceptors.add(RefreshTokenInterceptor());
     // dio.interceptors.add(TokenInterceptors());
     dio.interceptors.add(
@@ -55,8 +66,8 @@ abstract class StagingAppModule {
     return dio;
   }
 
-  // @LazySingleton(env: [Environment.dev])
-  // AbstractRemoteFileManager remoteFileManager(Dio dio) {
-  //   return DioClientFileManager(dio);
-  // }
+  @LazySingleton(env: [Environment.dev])
+  AbstractRemoteFileManager remoteFileManager(Dio dio) {
+    return DioClientFileManager(dio);
+  }
 }

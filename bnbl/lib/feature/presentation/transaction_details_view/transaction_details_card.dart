@@ -1,32 +1,18 @@
+import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_cubit.dart';
 import 'package:bnbl/feature/presentation/transaction_details_view/transaction_text.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class TransactionDetailsCard extends StatelessWidget {
-  final String merchantName;
-  final String refNumber;
-  final String paymentMethod;
-  final String paymentTime;
-  final String senderName;
-  final double cost;
-  final double fees;
-  final String paymentStatus;
-
   const TransactionDetailsCard({
     super.key,
-    required this.merchantName,
-    required this.refNumber,
-    required this.paymentMethod,
-    required this.senderName,
-    required this.cost,
-    required this.fees,
-    required this.paymentStatus,
-    required this.paymentTime,
   });
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<QRScannerCubit>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 24),
       padding: const EdgeInsets.all(16.0),
@@ -40,7 +26,7 @@ class TransactionDetailsCard extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10.0),
             padding:
-                const EdgeInsets.symmetric(horizontal: 70.0, vertical: 18.0),
+                const EdgeInsets.symmetric(horizontal: 50.0, vertical: 18.0),
             decoration: BoxDecoration(
               color: Colors.grey.shade100,
               borderRadius: BorderRadius.circular(8.0),
@@ -53,42 +39,42 @@ class TransactionDetailsCard extends StatelessWidget {
           const Gap(18),
           TransactionText(
             title: "Merchant Name",
-            content: merchantName,
+            content: cubit.receipt?.merchantName ?? '',
           ),
           const Gap(16),
           TransactionText(
             title: "Ref Number",
-            content: refNumber,
+            content: cubit.receipt?.refNumber ?? '',
           ),
           const Gap(16),
           TransactionText(
             title: "Payment Time",
-            content: paymentTime,
+            content: cubit.receipt?.paymentTime.toString() ?? '',
           ),
           const Gap(16),
           TransactionText(
             title: "Payment Method",
-            content: paymentMethod,
+            content: cubit.receipt?.paymentMethod ?? '',
           ),
           const Gap(16),
           TransactionText(
             title: "Sender Name",
-            content: senderName,
+            content: cubit.receipt?.senderName ?? '',
           ),
           const Gap(32),
           TransactionText(
             title: "Cost",
-            content: cost.toString(),
+            content: cubit.receipt?.cost.toString(),
           ),
           const Gap(16),
           TransactionText(
             title: "Fees",
-            content: fees.toString(),
+            content: cubit.receipt?.fees.toString(),
           ),
           const Gap(16),
           TransactionText(
             title: "Payment Status",
-            content: fees.toString(),
+            content: cubit.receipt?.paymentMethod.toString(),
           ),
         ],
       ),

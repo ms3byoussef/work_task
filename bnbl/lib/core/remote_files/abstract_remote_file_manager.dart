@@ -45,10 +45,10 @@ abstract class AbstractRemoteFileManager {
   ///[bucket] is something like folder
   ///[filename] is remote name for the uploaded file
   ///[pathToSaveThemFile] path that you want to save the file inside it
-  Future<void> downloadFileAndSaveItToPath(
-      {required String bucket,
-      required String name,
-      required String pathToSaveThemFile});
+  // Future<void> downloadFileAndSaveItToPath(
+  //     {required String bucket,
+  //     required String name,
+  //     required String pathToSaveThemFile});
 
   Future<bool> isBucketExist({required String bucket});
 

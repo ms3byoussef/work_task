@@ -22,11 +22,13 @@ class _AddTransactionService implements AddTransactionService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> addTransaction() async {
+  Future<void> addTransaction(
+      {required TransactionModel transactionModel}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(transactionModel.toJson());
     final _options = _setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -34,7 +36,7 @@ class _AddTransactionService implements AddTransactionService {
     )
         .compose(
           _dio.options,
-          '/add-transaction',
+          '/post_transaction',
           queryParameters: queryParameters,
           data: _data,
         )

@@ -12,7 +12,7 @@ class TransactionText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          title ?? 'Merchant Name:',
+          title ?? '',
           style: context.textTheme.small,
           softWrap: true,
         ),

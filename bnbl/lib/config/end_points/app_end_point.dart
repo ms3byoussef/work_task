@@ -1,3 +1,3 @@
 class AppEndPoint {
-  static const String getAddTransaction = '/add-transaction';
+  static const String getPostTransaction = '/post_transaction';
 }

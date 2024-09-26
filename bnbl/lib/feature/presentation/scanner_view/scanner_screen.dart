@@ -27,7 +27,7 @@ class _QRScannerScreenState extends State<QRScannerScreen> {
       body: BlocConsumer<QRScannerCubit, QRScannerState>(
         listener: (context, state) {
           state.whenOrNull(
-            qRScannerSuccess: (state) {
+            qRScannerSuccess: (_) {
               context.router.push(
                 const TransactionDetailsRoute(),
               );

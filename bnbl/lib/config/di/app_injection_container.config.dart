@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../core/di/core_app_module.dart' as _i201;
+import '../../core/remote_files/abstract_remote_file_manager.dart' as _i499;
 import '../../environments/production/production_app_module.dart' as _i739;
 import '../../environments/production/production_environment.dart' as _i548;
 import '../../environments/staging/staging_app_module.dart' as _i881;
@@ -27,6 +28,7 @@ import '../../feature/data/remote/services/add_transaction_service.dart'
 import '../../feature/data/repository/add_transaction_repository.dart' as _i132;
 import '../../feature/data/repository/add_transaction_repository_impl.dart'
     as _i47;
+import '../../feature/domain/add_transaction_use_case.dart' as _i754;
 import '../../feature/presentation/add_transaction_view/cubit/transaction_cubit.dart'
     as _i666;
 import '../../feature/presentation/camera_screen/cubit/camera_cubit.dart'
@@ -55,7 +57,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => coreAppModule.prefs,
       preResolve: true,
     );
-    gh.factory<_i666.TransactionCubit>(() => _i666.TransactionCubit());
     gh.factory<_i466.CameraCubit>(() => _i466.CameraCubit());
     gh.factory<_i541.QRScannerCubit>(() => _i541.QRScannerCubit());
     gh.lazySingleton<_i548.ProductionEnvironment>(
@@ -68,6 +69,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i561.AddTransactionService>(
         () => _i561.AddTransactionService(gh<_i361.Dio>()));
+    gh.lazySingleton<_i499.AbstractRemoteFileManager>(
+      () => stagingAppModule.remoteFileManager(gh<_i361.Dio>()),
+      registerFor: {_dev},
+    );
     gh.factory<_i175.AddTransactionRemoteDataSource>(() =>
         _i157.AddTransactionRemoteDataSourceImpl(
             gh<_i561.AddTransactionService>()));
@@ -79,6 +84,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i132.AddTransactionRepository>(() =>
         _i47.AddTransactionRepositoryImpl(
             gh<_i175.AddTransactionRemoteDataSource>()));
+    gh.factory<_i754.AddTransactionUseCase>(() =>
+        _i754.AddTransactionUseCase(gh<_i132.AddTransactionRepository>()));
+    gh.factory<_i666.TransactionCubit>(() => _i666.TransactionCubit(
+          gh<_i754.AddTransactionUseCase>(),
+          gh<_i499.AbstractRemoteFileManager>(),
+        ));
     return this;
   }
 }

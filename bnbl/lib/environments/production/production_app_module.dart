@@ -16,7 +16,12 @@ abstract class ProductionAppModule {
         baseUrl: productionEnvironment.productionUrl,
       ),
     );
-
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      // options.headers['Authorization'] = 'Bearer $partnerToken';
+      options.headers['partner_token'] = "";
+      options.headers['language'] = 'en';
+      return handler.next(options);
+    }));
     dio.interceptors.add(
       InterceptorsWrapper(
         onError: ((e, handler) async {

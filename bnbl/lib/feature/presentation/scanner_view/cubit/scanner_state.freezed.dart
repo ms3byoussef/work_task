@@ -19,21 +19,27 @@ mixin _$QRScannerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Barcode? result) qRScannerSuccess,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
     required TResult Function(String? error) qRScannerError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Barcode? result)? qRScannerSuccess,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
     TResult? Function(String? error)? qRScannerError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Barcode? result)? qRScannerSuccess,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
     TResult Function(String? error)? qRScannerError,
     required TResult orElse(),
   }) =>
@@ -41,21 +47,27 @@ mixin _$QRScannerState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
     required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
     required TResult Function(_QRScannerError value) qRScannerError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
     TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
     TResult? Function(_QRScannerError value)? qRScannerError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
     TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
     TResult Function(_QRScannerError value)? qRScannerError,
     required TResult orElse(),
   }) =>
@@ -119,7 +131,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Barcode? result) qRScannerSuccess,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
     required TResult Function(String? error) qRScannerError,
   }) {
     return initial();
@@ -129,7 +143,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Barcode? result)? qRScannerSuccess,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
     TResult? Function(String? error)? qRScannerError,
   }) {
     return initial?.call();
@@ -139,7 +155,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Barcode? result)? qRScannerSuccess,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
     TResult Function(String? error)? qRScannerError,
     required TResult orElse(),
   }) {
@@ -153,7 +171,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
     required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
     required TResult Function(_QRScannerError value) qRScannerError,
   }) {
     return initial(this);
@@ -163,7 +183,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
     TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
     TResult? Function(_QRScannerError value)? qRScannerError,
   }) {
     return initial?.call(this);
@@ -173,7 +195,9 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
     TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
     TResult Function(_QRScannerError value)? qRScannerError,
     required TResult orElse(),
   }) {
@@ -189,12 +213,132 @@ abstract class _Initial implements QRScannerState {
 }
 
 /// @nodoc
+abstract class _$$QRScannerLoadingImplCopyWith<$Res> {
+  factory _$$QRScannerLoadingImplCopyWith(_$QRScannerLoadingImpl value,
+          $Res Function(_$QRScannerLoadingImpl) then) =
+      __$$QRScannerLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$QRScannerLoadingImplCopyWithImpl<$Res>
+    extends _$QRScannerStateCopyWithImpl<$Res, _$QRScannerLoadingImpl>
+    implements _$$QRScannerLoadingImplCopyWith<$Res> {
+  __$$QRScannerLoadingImplCopyWithImpl(_$QRScannerLoadingImpl _value,
+      $Res Function(_$QRScannerLoadingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$QRScannerLoadingImpl implements _QRScannerLoading {
+  const _$QRScannerLoadingImpl();
+
+  @override
+  String toString() {
+    return 'QRScannerState.qRScannerLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$QRScannerLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
+    required TResult Function(String? error) qRScannerError,
+  }) {
+    return qRScannerLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
+    TResult? Function(String? error)? qRScannerError,
+  }) {
+    return qRScannerLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
+    TResult Function(String? error)? qRScannerError,
+    required TResult orElse(),
+  }) {
+    if (qRScannerLoading != null) {
+      return qRScannerLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
+    required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
+    required TResult Function(_QRScannerError value) qRScannerError,
+  }) {
+    return qRScannerLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
+    TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
+    TResult? Function(_QRScannerError value)? qRScannerError,
+  }) {
+    return qRScannerLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
+    TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
+    TResult Function(_QRScannerError value)? qRScannerError,
+    required TResult orElse(),
+  }) {
+    if (qRScannerLoading != null) {
+      return qRScannerLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _QRScannerLoading implements QRScannerState {
+  const factory _QRScannerLoading() = _$QRScannerLoadingImpl;
+}
+
+/// @nodoc
 abstract class _$$QRScannerSuccessImplCopyWith<$Res> {
   factory _$$QRScannerSuccessImplCopyWith(_$QRScannerSuccessImpl value,
           $Res Function(_$QRScannerSuccessImpl) then) =
       __$$QRScannerSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Barcode? result});
+  $Res call({String? result});
 }
 
 /// @nodoc
@@ -214,7 +358,7 @@ class __$$QRScannerSuccessImplCopyWithImpl<$Res>
       freezed == result
           ? _value.result
           : result // ignore: cast_nullable_to_non_nullable
-              as Barcode?,
+              as String?,
     ));
   }
 }
@@ -225,7 +369,7 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   const _$QRScannerSuccessImpl(this.result);
 
   @override
-  final Barcode? result;
+  final String? result;
 
   @override
   String toString() {
@@ -254,7 +398,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Barcode? result) qRScannerSuccess,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
     required TResult Function(String? error) qRScannerError,
   }) {
     return qRScannerSuccess(result);
@@ -264,7 +410,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Barcode? result)? qRScannerSuccess,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
     TResult? Function(String? error)? qRScannerError,
   }) {
     return qRScannerSuccess?.call(result);
@@ -274,7 +422,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Barcode? result)? qRScannerSuccess,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
     TResult Function(String? error)? qRScannerError,
     required TResult orElse(),
   }) {
@@ -288,7 +438,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
     required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
     required TResult Function(_QRScannerError value) qRScannerError,
   }) {
     return qRScannerSuccess(this);
@@ -298,7 +450,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
     TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
     TResult? Function(_QRScannerError value)? qRScannerError,
   }) {
     return qRScannerSuccess?.call(this);
@@ -308,7 +462,9 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
     TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
     TResult Function(_QRScannerError value)? qRScannerError,
     required TResult orElse(),
   }) {
@@ -320,12 +476,165 @@ class _$QRScannerSuccessImpl implements _QRScannerSuccess {
 }
 
 abstract class _QRScannerSuccess implements QRScannerState {
-  const factory _QRScannerSuccess(final Barcode? result) =
+  const factory _QRScannerSuccess(final String? result) =
       _$QRScannerSuccessImpl;
 
-  Barcode? get result;
+  String? get result;
   @JsonKey(ignore: true)
   _$$QRScannerSuccessImplCopyWith<_$QRScannerSuccessImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ReceiptSuccessImplCopyWith<$Res> {
+  factory _$$ReceiptSuccessImplCopyWith(_$ReceiptSuccessImpl value,
+          $Res Function(_$ReceiptSuccessImpl) then) =
+      __$$ReceiptSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ReceiptModel? result});
+}
+
+/// @nodoc
+class __$$ReceiptSuccessImplCopyWithImpl<$Res>
+    extends _$QRScannerStateCopyWithImpl<$Res, _$ReceiptSuccessImpl>
+    implements _$$ReceiptSuccessImplCopyWith<$Res> {
+  __$$ReceiptSuccessImplCopyWithImpl(
+      _$ReceiptSuccessImpl _value, $Res Function(_$ReceiptSuccessImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? result = freezed,
+  }) {
+    return _then(_$ReceiptSuccessImpl(
+      freezed == result
+          ? _value.result
+          : result // ignore: cast_nullable_to_non_nullable
+              as ReceiptModel?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ReceiptSuccessImpl implements _ReceiptSuccess {
+  const _$ReceiptSuccessImpl(this.result);
+
+  @override
+  final ReceiptModel? result;
+
+  @override
+  String toString() {
+    return 'QRScannerState.receiptSuccess(result: $result)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ReceiptSuccessImpl &&
+            (identical(other.result, result) || other.result == result));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, result);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ReceiptSuccessImplCopyWith<_$ReceiptSuccessImpl> get copyWith =>
+      __$$ReceiptSuccessImplCopyWithImpl<_$ReceiptSuccessImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
+    required TResult Function(String? error) qRScannerError,
+  }) {
+    return receiptSuccess(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
+    TResult? Function(String? error)? qRScannerError,
+  }) {
+    return receiptSuccess?.call(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
+    TResult Function(String? error)? qRScannerError,
+    required TResult orElse(),
+  }) {
+    if (receiptSuccess != null) {
+      return receiptSuccess(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
+    required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
+    required TResult Function(_QRScannerError value) qRScannerError,
+  }) {
+    return receiptSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
+    TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
+    TResult? Function(_QRScannerError value)? qRScannerError,
+  }) {
+    return receiptSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
+    TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
+    TResult Function(_QRScannerError value)? qRScannerError,
+    required TResult orElse(),
+  }) {
+    if (receiptSuccess != null) {
+      return receiptSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ReceiptSuccess implements QRScannerState {
+  const factory _ReceiptSuccess(final ReceiptModel? result) =
+      _$ReceiptSuccessImpl;
+
+  ReceiptModel? get result;
+  @JsonKey(ignore: true)
+  _$$ReceiptSuccessImplCopyWith<_$ReceiptSuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -395,7 +704,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Barcode? result) qRScannerSuccess,
+    required TResult Function() qRScannerLoading,
+    required TResult Function(String? result) qRScannerSuccess,
+    required TResult Function(ReceiptModel? result) receiptSuccess,
     required TResult Function(String? error) qRScannerError,
   }) {
     return qRScannerError(error);
@@ -405,7 +716,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Barcode? result)? qRScannerSuccess,
+    TResult? Function()? qRScannerLoading,
+    TResult? Function(String? result)? qRScannerSuccess,
+    TResult? Function(ReceiptModel? result)? receiptSuccess,
     TResult? Function(String? error)? qRScannerError,
   }) {
     return qRScannerError?.call(error);
@@ -415,7 +728,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Barcode? result)? qRScannerSuccess,
+    TResult Function()? qRScannerLoading,
+    TResult Function(String? result)? qRScannerSuccess,
+    TResult Function(ReceiptModel? result)? receiptSuccess,
     TResult Function(String? error)? qRScannerError,
     required TResult orElse(),
   }) {
@@ -429,7 +744,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_QRScannerLoading value) qRScannerLoading,
     required TResult Function(_QRScannerSuccess value) qRScannerSuccess,
+    required TResult Function(_ReceiptSuccess value) receiptSuccess,
     required TResult Function(_QRScannerError value) qRScannerError,
   }) {
     return qRScannerError(this);
@@ -439,7 +756,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_QRScannerLoading value)? qRScannerLoading,
     TResult? Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult? Function(_ReceiptSuccess value)? receiptSuccess,
     TResult? Function(_QRScannerError value)? qRScannerError,
   }) {
     return qRScannerError?.call(this);
@@ -449,7 +768,9 @@ class _$QRScannerErrorImpl implements _QRScannerError {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_QRScannerLoading value)? qRScannerLoading,
     TResult Function(_QRScannerSuccess value)? qRScannerSuccess,
+    TResult Function(_ReceiptSuccess value)? receiptSuccess,
     TResult Function(_QRScannerError value)? qRScannerError,
     required TResult orElse(),
   }) {
