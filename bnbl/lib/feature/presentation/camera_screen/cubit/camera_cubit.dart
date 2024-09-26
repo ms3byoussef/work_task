@@ -16,9 +16,9 @@ import 'package:path_provider/path_provider.dart';
 @injectable
 class CameraCubit extends Cubit<CameraState> {
   CameraCubit() : super(const CameraState.initial());
-  File? imageFile;
   CameraController? _controller;
   List<CameraDescription>? cameras;
+  dynamic imageFile;
 
   bool get isImageFileValid => imageFile != null;
 
@@ -41,18 +41,25 @@ class CameraCubit extends Cubit<CameraState> {
   Future<void> takePicture() async {
     if (_controller != null && _controller!.value.isInitialized) {
       try {
-        final directory = await getApplicationDocumentsDirectory();
-        final imagePath = path.join(directory.path, '${DateTime.now()}.png');
+        imageFile = null;
         final XFile picture = await _controller!.takePicture();
-        imageFile = File(picture.path);
-        debugPrint(imageFile!.path);
+        imageFile = await _savePhotoToFile(picture);
         emit(CameraState.pictureTaken(imageFile));
+        debugPrint("################${imageFile!.path}");
 
         // close();
       } catch (e) {
         emit(CameraState.cameraError(e.toString()));
       }
     }
+  }
+
+  Future<File> _savePhotoToFile(XFile image) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final imagePath = path.join(directory.path, '${DateTime.now()}.png');
+    // Copy the captured photo to a new location in the file system
+    File file = File(image.path);
+    return file.copy(imagePath);
   }
 
   void switchCamera() async {

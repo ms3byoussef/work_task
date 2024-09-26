@@ -18,6 +18,15 @@ import '../../environments/production/production_app_module.dart' as _i739;
 import '../../environments/production/production_environment.dart' as _i548;
 import '../../environments/staging/staging_app_module.dart' as _i881;
 import '../../environments/staging/staging_environment.dart' as _i496;
+import '../../feature/data/remote/datasource/add_transaction_remote_data_source.dart'
+    as _i175;
+import '../../feature/data/remote/datasource/add_transaction_remote_data_source_impl.dart'
+    as _i157;
+import '../../feature/data/remote/services/add_transaction_service.dart'
+    as _i561;
+import '../../feature/data/repository/add_transaction_repository.dart' as _i132;
+import '../../feature/data/repository/add_transaction_repository_impl.dart'
+    as _i47;
 import '../../feature/presentation/add_transaction_view/cubit/transaction_cubit.dart'
     as _i666;
 import '../../feature/presentation/camera_screen/cubit/camera_cubit.dart'
@@ -57,11 +66,19 @@ extension GetItInjectableX on _i174.GetIt {
       () => stagingAppModule.dioStaging(gh<_i496.StagingEnvironment>()),
       registerFor: {_dev},
     );
+    gh.factory<_i561.AddTransactionService>(
+        () => _i561.AddTransactionService(gh<_i361.Dio>()));
+    gh.factory<_i175.AddTransactionRemoteDataSource>(() =>
+        _i157.AddTransactionRemoteDataSourceImpl(
+            gh<_i561.AddTransactionService>()));
     gh.lazySingleton<_i361.Dio>(
       () =>
           productionAppModule.dioProduction(gh<_i548.ProductionEnvironment>()),
       registerFor: {_prod},
     );
+    gh.factory<_i132.AddTransactionRepository>(() =>
+        _i47.AddTransactionRepositoryImpl(
+            gh<_i175.AddTransactionRemoteDataSource>()));
     return this;
   }
 }

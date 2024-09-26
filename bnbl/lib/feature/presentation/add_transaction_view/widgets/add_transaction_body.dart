@@ -69,6 +69,7 @@ class AddTransactionCapture extends StatelessWidget {
       action: cubit.isImageFileValid ? "Change" : "Capture",
       onTap: () {
         context.router.push(const CameraRoute());
+        context.read<CameraCubit>().initializeCamera();
       },
     );
   }

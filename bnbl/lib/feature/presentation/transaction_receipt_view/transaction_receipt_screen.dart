@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:bnbl/config/router/web_app_router.dart';
+import 'package:bnbl/feature/presentation/camera_screen/cubit/camera_cubit.dart';
 import 'package:bnbl/feature/presentation/components/screen_head.dart';
 import 'package:design_system/app_icon.dart';
 import 'package:design_system/buttons/app_button.dart';
 import 'package:design_system/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class TransactionReceiptScreen extends StatelessWidget {
@@ -35,11 +37,14 @@ class TransactionReceiptScreen extends StatelessWidget {
               ),
               const Spacer(),
               AppButton(
-                type: AppButtonType.border,
-                title: "Try capture ",
-                icon: AppIcon(Assets.icons.receiptAdd),
-                onPressed: () => context.router.push(const CameraRoute()),
-              ),
+                  type: AppButtonType.border,
+                  title: "Try capture ",
+                  icon: AppIcon(Assets.icons.receiptAdd),
+                  onPressed: () {
+                    context.read<CameraCubit>().initializeCamera();
+
+                    context.router.push(const CameraRoute());
+                  }),
               AppButton(
                 type: AppButtonType.active,
                 title: "Confirm ",

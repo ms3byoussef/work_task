@@ -1,5 +1,7 @@
 // // ignore_for_file: avoid_print
 
+// ignore_for_file: avoid_print
+
 import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -11,6 +13,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
   QRScannerCubit() : super(const QRScannerState.initial());
   QRViewController? controller;
   dynamic codeScan;
+
   bool get isQRValid => codeScan != null;
 
   void onQRViewCreated(controller) {
