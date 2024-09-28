@@ -45,20 +45,16 @@ class AppButton extends StatelessWidget {
           decoration: BoxDecoration(
             border: border ?? Border.all(color: Colors.transparent),
             borderRadius: BorderRadius.circular(48),
-            gradient: LinearGradient(
-              colors: [
-                context.colors.primaryColor,
-                context.colors.accentColor,
-              ],
-            ),
+            color: context.colors.primaryColor,
           ),
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: const CircularProgressIndicator(
               color: Colors.white,
             ),
           ),
         );
+        break;
       case AppButtonType.active:
         return Container(
           width: width ?? double.infinity,

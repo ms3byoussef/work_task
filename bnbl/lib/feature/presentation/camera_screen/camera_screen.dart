@@ -42,7 +42,7 @@ class _CameraScreenState extends State<CameraScreen> {
             cameraReady: (controller) => CameraScreenContent(
               controller: controller,
             ),
-            cameraError: (error) => const Center(),
+            cameraError: (error) => Center(child: Text(error)),
             orElse: () => const Center(),
           );
         },

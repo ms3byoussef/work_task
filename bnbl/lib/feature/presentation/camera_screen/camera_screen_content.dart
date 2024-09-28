@@ -19,8 +19,15 @@ class CameraScreenContent extends StatefulWidget {
 
 class _CameraScreenContentState extends State<CameraScreenContent> {
   @override
+  void dispose() {
+    widget.controller.dispose();
+    // context.watch<CameraCubit>().close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final cubit = context.read<CameraCubit>();
+    final cubit = context.watch<CameraCubit>();
 
     return Stack(
       children: [

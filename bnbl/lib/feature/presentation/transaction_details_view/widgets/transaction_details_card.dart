@@ -74,7 +74,7 @@ class TransactionDetailsCard extends StatelessWidget {
           const Gap(16),
           TransactionText(
             title: "Payment Status",
-            content: cubit.receipt.paymentMethod.toString(),
+            content: cubit.receipt.paymentMethod ?? 'Dues',
           ),
         ],
       ),

@@ -24,9 +24,12 @@ class AddTransactionConfirmButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        type: transactionCubit.isTransactionValid
-            ? AppButtonType.active
-            : AppButtonType.inactive,
+        type: transactionCubit.state.maybeMap(
+          transactionLoading: (_) => AppButtonType.loading,
+          orElse: () => transactionCubit.isTransactionValid
+              ? AppButtonType.active
+              : AppButtonType.inactive,
+        ),
         title: "Confirm ",
         onPressed: transactionCubit.isTransactionValid
             ? transactionCubit.addTransaction
@@ -94,6 +97,7 @@ class AddTransactionScan extends StatelessWidget {
         action: cubit.isQRValid ? "Change" : "Scan",
         onTap: () {
           cubit.resetScanner();
+
           context.router.push(const QRScannerRoute());
         },
       ),

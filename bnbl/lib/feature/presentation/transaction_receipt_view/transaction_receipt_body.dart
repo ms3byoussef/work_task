@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
@@ -36,7 +38,6 @@ class TryCaptureButton extends StatelessWidget {
         icon: AppIcon(Assets.icons.receiptAdd),
         onPressed: () {
           context.read<CameraCubit>().initializeCamera();
-
           context.router.push(const CameraRoute());
         });
   }

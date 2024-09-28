@@ -28,7 +28,7 @@ class CameraCubit extends Cubit<CameraState> {
       cameras = await availableCameras();
       if (cameras!.isNotEmpty) {
         controller = CameraController(cameras![0], ResolutionPreset.high);
-        await controller!.initialize();
+        await controller?.initialize();
         emit(CameraState.cameraReady(controller!));
       } else {
         emit(const CameraState.cameraError('No cameras found'));
@@ -46,8 +46,6 @@ class CameraCubit extends Cubit<CameraState> {
         imageFile = await _savePhotoToFile(picture);
         emit(CameraState.pictureTaken(imageFile));
         debugPrint("################${imageFile!.path}");
-
-        // close();
       } catch (e) {
         emit(CameraState.cameraError(e.toString()));
       }
@@ -89,6 +87,14 @@ class CameraCubit extends Cubit<CameraState> {
       emit(CameraState.cameraReady(controller!));
     }
   }
+
+  // void resetCamera() {
+  //   emit(const CameraState.cameraLoading());
+
+  //   if (controller == null) {
+  //     initializeCamera();
+  //   }
+  // }
 
   @override
   Future<void> close() {

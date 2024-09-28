@@ -19,34 +19,31 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
   bool get isQRValid => receipt.cost != null;
 
-  void onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-
+  void onQRViewCreated(controller) {
+    // this.controller = controller;
+    this.controller?.hasPermissions;
     dataCode = null;
     try {
       controller.scannedDataStream.listen((scanData) {
         _handleScan(scanData.code);
       });
-      controller.stopCamera();
     } catch (e) {
       emit(QRScannerState.qRScannerError(e.toString()));
     }
   }
 
-  void _handleScan(String? scannedCode) {
+  void _handleScan(String? scannedCode) async {
     if (scannedCode != null) {
       debugPrint("************** Scanned Code: $scannedCode ***************");
       decodeAndParseReceipt(scannedCode);
       dataCode = scannedCode;
       emit(QRScannerState.qRScannerSuccess(dataCode));
-
-      // await close();
     } else {
       emit(const QRScannerState.qRScannerError('Scanned code is null'));
     }
   }
 
-  void decodeAndParseReceipt(String base64String) {
+  void decodeAndParseReceipt(String base64String) async {
     emit(const QRScannerState.qRScannerLoading());
     try {
       final decodedString = utf8.decode(base64.decode(base64String));
@@ -96,6 +93,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
       print("Decoded Receipt: $receipt");
       emit(QRScannerState.receiptSuccess(receipt));
+      close();
     } catch (e) {
       emit(QRScannerState.qRScannerError(
           'Error decoding or parsing the receipt: $e'));
@@ -112,7 +110,8 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
   @override
   close() {
-    controller?.dispose();
+    controller!.dispose();
+    controller!.stopCamera();
     return super.close();
   }
 }
