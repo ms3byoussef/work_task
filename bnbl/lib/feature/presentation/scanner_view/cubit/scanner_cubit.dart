@@ -46,7 +46,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
     }
   }
 
-  void decodeAndParseReceipt(String base64String) async {
+  void decodeAndParseReceipt(String base64String) {
     emit(const QRScannerState.qRScannerLoading());
     try {
       final decodedString = utf8.decode(base64.decode(base64String));

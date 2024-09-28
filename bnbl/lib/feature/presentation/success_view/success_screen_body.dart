@@ -39,3 +39,14 @@ class SuccessHeadline extends StatelessWidget {
         textAlign: TextAlign.center, style: context.textTheme.headline);
   }
 }
+
+class SuccessIcon extends StatelessWidget {
+  const SuccessIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppIcon(Assets.icons.done, width: 163, height: 200);
+  }
+}

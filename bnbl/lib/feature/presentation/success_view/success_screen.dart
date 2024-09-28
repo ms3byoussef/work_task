@@ -1,6 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:bnbl/feature/presentation/success_view/success_screen_body.dart';
-import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -10,19 +9,19 @@ class SuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppIcon(Assets.icons.done),
-            const Gap(40),
-            const SuccessHeadline(),
-            const Gap(10),
-            const SuccessCaptionText(),
-            const Gap(40),
-            const GoToHomeButton()
+            SuccessIcon(),
+            Gap(40),
+            SuccessHeadline(),
+            Gap(10),
+            SuccessCaptionText(),
+            Gap(40),
+            GoToHomeButton()
           ],
         ),
       ),
