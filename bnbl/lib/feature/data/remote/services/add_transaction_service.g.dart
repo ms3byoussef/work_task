@@ -22,17 +22,40 @@ class _AddTransactionService implements AddTransactionService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<void> addTransaction(
-      {required TransactionModel transactionModel}) async {
+  Future<void> postAddTransaction({
+    required String vendorVatNum,
+    required double amount,
+    required File image,
+    required String date,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(transactionModel.toJson());
+    final _data = FormData();
+    _data.fields.add(MapEntry(
+      'vendor_vat_num',
+      vendorVatNum,
+    ));
+    _data.fields.add(MapEntry(
+      'amount',
+      amount.toString(),
+    ));
+    _data.files.add(MapEntry(
+      'image',
+      MultipartFile.fromFileSync(
+        image.path,
+        filename: image.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    _data.fields.add(MapEntry(
+      'date',
+      date,
+    ));
     final _options = _setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
+      contentType: 'multipart/form-data',
     )
         .compose(
           _dio.options,

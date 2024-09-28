@@ -14,7 +14,6 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../core/di/core_app_module.dart' as _i201;
-import '../../core/remote_files/abstract_remote_file_manager.dart' as _i499;
 import '../../environments/production/production_app_module.dart' as _i739;
 import '../../environments/production/production_environment.dart' as _i548;
 import '../../environments/staging/staging_app_module.dart' as _i881;
@@ -69,10 +68,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i561.AddTransactionService>(
         () => _i561.AddTransactionService(gh<_i361.Dio>()));
-    gh.lazySingleton<_i499.AbstractRemoteFileManager>(
-      () => stagingAppModule.remoteFileManager(gh<_i361.Dio>()),
-      registerFor: {_dev},
-    );
     gh.factory<_i175.AddTransactionRemoteDataSource>(() =>
         _i157.AddTransactionRemoteDataSourceImpl(
             gh<_i561.AddTransactionService>()));
@@ -86,10 +81,8 @@ extension GetItInjectableX on _i174.GetIt {
             gh<_i175.AddTransactionRemoteDataSource>()));
     gh.factory<_i754.AddTransactionUseCase>(() =>
         _i754.AddTransactionUseCase(gh<_i132.AddTransactionRepository>()));
-    gh.factory<_i666.TransactionCubit>(() => _i666.TransactionCubit(
-          gh<_i754.AddTransactionUseCase>(),
-          gh<_i499.AbstractRemoteFileManager>(),
-        ));
+    gh.factory<_i666.TransactionCubit>(
+        () => _i666.TransactionCubit(gh<_i754.AddTransactionUseCase>()));
     return this;
   }
 }

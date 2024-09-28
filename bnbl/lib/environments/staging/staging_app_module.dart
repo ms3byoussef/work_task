@@ -1,5 +1,3 @@
-import 'package:bnbl/core/remote_files/abstract_remote_file_manager.dart';
-import 'package:bnbl/core/remote_files/remote_file_manager.dart';
 import 'package:bnbl/environments/staging/staging_environment.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -38,7 +36,7 @@ abstract class StagingAppModule {
     // Interceptor to add partner_token to every request
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // options.headers['Authorization'] = 'Bearer $partnerToken';
-      options.headers['partner_token'] = "";
+      options.headers['partner_token'] = "88dc4ac6-d325-11ee-9dde-77ef2642ce54";
       options.headers['language'] = 'en';
       return handler.next(options);
     }));
@@ -66,8 +64,8 @@ abstract class StagingAppModule {
     return dio;
   }
 
-  @LazySingleton(env: [Environment.dev])
-  AbstractRemoteFileManager remoteFileManager(Dio dio) {
-    return DioClientFileManager(dio);
-  }
+  // @LazySingleton(env: [Environment.dev])
+  // AbstractRemoteFileManager remoteFileManager(Dio dio) {
+  //   return DioClientFileManager(dio);
+  // }
 }

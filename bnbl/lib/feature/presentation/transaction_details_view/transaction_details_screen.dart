@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bnbl/config/router/web_app_router.dart';
+import 'package:bnbl/feature/presentation/add_transaction_view/cubit/transaction_cubit.dart';
 import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_cubit.dart';
 import 'package:bnbl/feature/presentation/transaction_details_view/transaction_details_card.dart';
 import 'package:design_system/app_icon.dart';
@@ -54,17 +55,36 @@ class ShareIcon extends StatelessWidget {
   }
 }
 
-class TransactionDetailsConfirmButton extends StatelessWidget {
+class TransactionDetailsConfirmButton extends StatefulWidget {
   const TransactionDetailsConfirmButton({
     super.key,
   });
 
   @override
+  State<TransactionDetailsConfirmButton> createState() =>
+      _TransactionDetailsConfirmButtonState();
+}
+
+class _TransactionDetailsConfirmButtonState
+    extends State<TransactionDetailsConfirmButton> {
+  @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<QRScannerCubit>();
+    final transactionCubit = context.read<TransactionCubit>();
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        onPressed: () => context.pushRoute(const AddTransactionRoute()),
+        onPressed: () {
+          final transaction = transactionCubit.transactionModel.copyWith(
+            refNumber: cubit.receipt.refNumber.toString(),
+            amount: cubit.receipt.cost,
+            date: cubit.receipt.paymentTime,
+          );
+          setState(() {});
+          transactionCubit.changeTransaction(transaction);
+          context.pushRoute(const AddTransactionRoute());
+        },
         type: AppButtonType.active,
         title: "Confirm ",
       ),
@@ -80,6 +100,7 @@ class TransactionDetailsHeadlineCost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<QRScannerCubit>();
+
     return Column(
       children: [
         AppIcon(Assets.icons.successIcon),
@@ -90,9 +111,9 @@ class TransactionDetailsHeadlineCost extends StatelessWidget {
               .copyWith(color: context.colors.accentColor),
         ),
         const Gap(8),
-        if (cubit.receipt?.cost != null)
+        if (cubit.receipt.cost != null)
           Text(
-            "${cubit.receipt?.cost} SAR",
+            "${cubit.receipt.cost} SAR",
             style: context.textTheme.headline2,
           ),
         const Gap(16),

@@ -20,12 +20,6 @@ class CameraScreenContent extends StatefulWidget {
 }
 
 class _CameraScreenContentState extends State<CameraScreenContent> {
-  // @override
-  // void dispose() {
-  //   widget.controller.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<CameraCubit>();
@@ -84,7 +78,9 @@ class _CameraScreenContentState extends State<CameraScreenContent> {
           child: Column(
             children: [
               GestureDetector(
-                onTap: cubit.takePicture,
+                onTap: () {
+                  cubit.takePicture();
+                },
                 child: Container(
                   height: 70,
                   width: 70,

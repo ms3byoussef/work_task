@@ -18,7 +18,7 @@ abstract class ProductionAppModule {
     );
     dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
       // options.headers['Authorization'] = 'Bearer $partnerToken';
-      options.headers['partner_token'] = "";
+      options.headers['partner_token'] = "88dc4ac6-d325-11ee-9dde-77ef2642ce54";
       options.headers['language'] = 'en';
       return handler.next(options);
     }));

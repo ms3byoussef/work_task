@@ -1,27 +1,27 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bnbl/core/remote_files/abstract_remote_file_manager.dart';
-import 'package:file_picker/file_picker.dart';
 
-Future<String?> uploadFile(
-  PlatformFile? platformFile,
+Future<File?> uploadFile(
+  dynamic file,
   AbstractRemoteFileManager manager, {
   required String filename,
 }) async {
-  if (platformFile?.bytes != null) {
+  if (file?.bytes != null) {
     return await manager.uploadByteFile(
       filename: filename,
-      bytes: platformFile!.bytes!,
+      bytes: file!.bytes!,
     );
-  } else if (platformFile?.readStream != null) {
+  } else if (file?.readStream != null) {
     return await manager.uploadStreamFile(
       filename: filename,
-      data: platformFile!.readStream!.map((event) => Uint8List.fromList(event)),
+      data: file!.readStream!.map((event) => Uint8List.fromList(event)),
     );
-  } else if (platformFile?.path != null) {
+  } else if (file?.path != null) {
     return await manager.uploadFileFromPath(
       name: filename,
-      path: platformFile!.path!,
+      path: file!.path!,
     );
   }
   return null;

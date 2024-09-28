@@ -20,6 +20,11 @@ class QRScannerScreen extends StatefulWidget {
 class _QRScannerScreenState extends State<QRScannerScreen> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   String? qrText;
+  @override
+  void dispose() {
+    context.read<QRScannerCubit>().controller?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

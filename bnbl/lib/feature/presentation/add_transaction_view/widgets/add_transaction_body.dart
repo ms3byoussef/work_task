@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bnbl/config/router/web_app_router.dart';
 import 'package:bnbl/core/di/core_injector_container.dart';
+import 'package:bnbl/feature/presentation/add_transaction_view/cubit/transaction_cubit.dart';
 import 'package:bnbl/feature/presentation/add_transaction_view/widgets/transaction_widget.dart';
 import 'package:bnbl/feature/presentation/camera_screen/cubit/camera_cubit.dart';
 import 'package:bnbl/feature/presentation/components/screen_head.dart';
@@ -18,17 +19,16 @@ class AddTransactionConfirmButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final qrScannerCubit = context.watch<QRScannerCubit>();
-    final cameraCubit = context.watch<CameraCubit>();
+    final transactionCubit = context.read<TransactionCubit>();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: AppButton(
-        type: (qrScannerCubit.isQRValid && cameraCubit.isImageFileValid)
+        type: transactionCubit.isTransactionValid
             ? AppButtonType.active
             : AppButtonType.inactive,
         title: "Confirm ",
-        onPressed: () {},
+        onPressed: transactionCubit.addTransaction,
       ),
     );
   }
@@ -90,6 +90,7 @@ class AddTransactionScan extends StatelessWidget {
         icon: cubit.isQRValid ? Assets.icons.copySuccess : Assets.icons.scan,
         action: cubit.isQRValid ? "Change" : "Scan",
         onTap: () {
+          cubit.resetScanner();
           context.router.push(const QRScannerRoute());
         },
       ),

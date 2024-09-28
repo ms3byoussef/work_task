@@ -1,5 +1,5 @@
-import 'package:bnbl/feature/data/models/transaction_model.dart';
+import 'dart:io';
 
 abstract class AddTransactionRemoteDataSource {
-  addTransaction(TransactionModel transactionModel);
+  addTransaction(String vendorVatNum, double amount, String date, File image);
 }

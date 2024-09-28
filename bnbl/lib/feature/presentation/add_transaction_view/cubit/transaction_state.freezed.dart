@@ -23,7 +23,7 @@ mixin _$TransactionState {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) =>
       throw _privateConstructorUsedError;
@@ -34,7 +34,7 @@ mixin _$TransactionState {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) =>
       throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ mixin _$TransactionState {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) =>
@@ -148,7 +148,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return initial();
@@ -162,7 +162,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return initial?.call();
@@ -176,7 +176,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -281,7 +281,7 @@ class _$TransactionLoadingImpl implements _TransactionLoading {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return transactionLoading();
@@ -295,7 +295,7 @@ class _$TransactionLoadingImpl implements _TransactionLoading {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return transactionLoading?.call();
@@ -309,7 +309,7 @@ class _$TransactionLoadingImpl implements _TransactionLoading {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -417,7 +417,7 @@ class _$TransactionSuccessfullyImpl implements _TransactionSuccessfully {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return transactionSuccessfully();
@@ -431,7 +431,7 @@ class _$TransactionSuccessfullyImpl implements _TransactionSuccessfully {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return transactionSuccessfully?.call();
@@ -445,7 +445,7 @@ class _$TransactionSuccessfullyImpl implements _TransactionSuccessfully {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -577,7 +577,7 @@ class _$TransactionChangeImpl implements _TransactionChange {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return transactionChange(model);
@@ -591,7 +591,7 @@ class _$TransactionChangeImpl implements _TransactionChange {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return transactionChange?.call(model);
@@ -605,7 +605,7 @@ class _$TransactionChangeImpl implements _TransactionChange {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -743,7 +743,7 @@ class _$TransactionErrorImpl implements _TransactionError {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return transactionError(error);
@@ -757,7 +757,7 @@ class _$TransactionErrorImpl implements _TransactionError {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return transactionError?.call(error);
@@ -771,7 +771,7 @@ class _$TransactionErrorImpl implements _TransactionError {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -845,7 +845,7 @@ abstract class _$$UploadImageSuccessImplCopyWith<$Res> {
           $Res Function(_$UploadImageSuccessImpl) then) =
       __$$UploadImageSuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? imageFile});
+  $Res call({File? imageFile});
 }
 
 /// @nodoc
@@ -865,7 +865,7 @@ class __$$UploadImageSuccessImplCopyWithImpl<$Res>
       freezed == imageFile
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as File?,
     ));
   }
 }
@@ -876,7 +876,7 @@ class _$UploadImageSuccessImpl implements _UploadImageSuccess {
   const _$UploadImageSuccessImpl(this.imageFile);
 
   @override
-  final String? imageFile;
+  final File? imageFile;
 
   @override
   String toString() {
@@ -910,7 +910,7 @@ class _$UploadImageSuccessImpl implements _UploadImageSuccess {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return uploadImageSuccess(imageFile);
@@ -924,7 +924,7 @@ class _$UploadImageSuccessImpl implements _UploadImageSuccess {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return uploadImageSuccess?.call(imageFile);
@@ -938,7 +938,7 @@ class _$UploadImageSuccessImpl implements _UploadImageSuccess {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {
@@ -997,10 +997,10 @@ class _$UploadImageSuccessImpl implements _UploadImageSuccess {
 }
 
 abstract class _UploadImageSuccess implements TransactionState {
-  const factory _UploadImageSuccess(final String? imageFile) =
+  const factory _UploadImageSuccess(final File? imageFile) =
       _$UploadImageSuccessImpl;
 
-  String? get imageFile;
+  File? get imageFile;
   @JsonKey(ignore: true)
   _$$UploadImageSuccessImplCopyWith<_$UploadImageSuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1049,7 +1049,7 @@ class _$UploadingImageImpl implements _UploadingImage {
     required TResult Function() transactionSuccessfully,
     required TResult Function(TransactionModel model) transactionChange,
     required TResult Function(AppExceptions error) transactionError,
-    required TResult Function(String? imageFile) uploadImageSuccess,
+    required TResult Function(File? imageFile) uploadImageSuccess,
     required TResult Function() uploadingImage,
   }) {
     return uploadingImage();
@@ -1063,7 +1063,7 @@ class _$UploadingImageImpl implements _UploadingImage {
     TResult? Function()? transactionSuccessfully,
     TResult? Function(TransactionModel model)? transactionChange,
     TResult? Function(AppExceptions error)? transactionError,
-    TResult? Function(String? imageFile)? uploadImageSuccess,
+    TResult? Function(File? imageFile)? uploadImageSuccess,
     TResult? Function()? uploadingImage,
   }) {
     return uploadingImage?.call();
@@ -1077,7 +1077,7 @@ class _$UploadingImageImpl implements _UploadingImage {
     TResult Function()? transactionSuccessfully,
     TResult Function(TransactionModel model)? transactionChange,
     TResult Function(AppExceptions error)? transactionError,
-    TResult Function(String? imageFile)? uploadImageSuccess,
+    TResult Function(File? imageFile)? uploadImageSuccess,
     TResult Function()? uploadingImage,
     required TResult orElse(),
   }) {

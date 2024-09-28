@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bnbl/core/di/core_injector_container.dart';
 import 'package:bnbl/core/modules/app_builder.dart';
+import 'package:bnbl/feature/presentation/add_transaction_view/cubit/transaction_cubit.dart';
 import 'package:bnbl/feature/presentation/camera_screen/cubit/camera_cubit.dart';
 import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_cubit.dart';
 import 'package:design_system/design_system.dart';
@@ -93,6 +94,9 @@ class _PaytallyAppState extends State<App> with WidgetsBindingObserver {
               ),
               BlocProvider(
                 create: (context) => getIt<CameraCubit>()..initializeCamera(),
+              ),
+              BlocProvider(
+                create: (context) => getIt<TransactionCubit>(),
               ),
             ],
             child: MediaQuery(
