@@ -23,6 +23,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
     dataCode = null;
     try {
+      controller.stopCamera();
       controller.scannedDataStream.listen((scanData) {
         _handleScan(scanData.code);
       });

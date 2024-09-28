@@ -16,7 +16,7 @@ import 'package:path_provider/path_provider.dart';
 @injectable
 class CameraCubit extends Cubit<CameraState> {
   CameraCubit() : super(const CameraState.initial());
-  CameraController? _controller;
+  CameraController? controller;
   List<CameraDescription>? cameras;
   dynamic imageFile;
 
@@ -27,9 +27,9 @@ class CameraCubit extends Cubit<CameraState> {
     try {
       cameras = await availableCameras();
       if (cameras!.isNotEmpty) {
-        _controller = CameraController(cameras![0], ResolutionPreset.high);
-        await _controller!.initialize();
-        emit(CameraState.cameraReady(_controller!));
+        controller = CameraController(cameras![0], ResolutionPreset.high);
+        await controller!.initialize();
+        emit(CameraState.cameraReady(controller!));
       } else {
         emit(const CameraState.cameraError('No cameras found'));
       }
@@ -39,10 +39,10 @@ class CameraCubit extends Cubit<CameraState> {
   }
 
   Future<void> takePicture() async {
-    if (_controller != null && _controller!.value.isInitialized) {
+    if (controller != null && controller!.value.isInitialized) {
       try {
         imageFile = null;
-        final XFile picture = await _controller!.takePicture();
+        final XFile picture = await controller!.takePicture();
         imageFile = await _savePhotoToFile(picture);
         emit(CameraState.pictureTaken(imageFile));
         debugPrint("################${imageFile!.path}");
@@ -65,16 +65,34 @@ class CameraCubit extends Cubit<CameraState> {
   void switchCamera() async {
     if (cameras != null && cameras!.length > 1) {
       final newIndex =
-          (cameras!.indexOf(_controller!.description) + 1) % cameras!.length;
-      _controller = CameraController(cameras![newIndex], ResolutionPreset.high);
-      await _controller!.initialize();
-      emit(CameraState.cameraReady(_controller!));
+          (cameras!.indexOf(controller!.description) + 1) % cameras!.length;
+      controller = CameraController(cameras![newIndex], ResolutionPreset.high);
+      await controller!.initialize();
+      emit(CameraState.cameraReady(controller!));
+    }
+  }
+
+  void setFlashOn() async {
+    if (controller != null) {
+      controller!.setFlashMode(
+        FlashMode.torch,
+      );
+      emit(CameraState.cameraReady(controller!));
+    }
+  }
+
+  void setFlashOff() async {
+    if (controller != null) {
+      controller!.setFlashMode(
+        FlashMode.off,
+      );
+      emit(CameraState.cameraReady(controller!));
     }
   }
 
   @override
   Future<void> close() {
-    _controller!.dispose();
+    controller!.dispose();
     return super.close();
   }
 }

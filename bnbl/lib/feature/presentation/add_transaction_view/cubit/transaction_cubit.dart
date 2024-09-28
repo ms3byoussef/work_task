@@ -34,8 +34,6 @@ class TransactionCubit extends Cubit<TransactionState> {
 
   addTransaction() async {
     emit(const TransactionState.transactionLoading());
-    // String filePath = imageFile!.path;
-    // MultipartFile image = await MultipartFile.fromFile(filePath);
 
     print("&&&&&&&&&&&&***${imageFile?.path}");
     final response = await _addTransactionUseCase(
@@ -67,4 +65,3 @@ class TransactionCubit extends Cubit<TransactionState> {
   //   emit(TransactionState.uploadImageSuccess(image));
   // }
 }
-// }

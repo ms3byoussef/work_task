@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:design_system/app_icon.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 

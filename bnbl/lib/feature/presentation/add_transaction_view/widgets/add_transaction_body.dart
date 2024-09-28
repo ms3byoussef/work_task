@@ -28,7 +28,9 @@ class AddTransactionConfirmButton extends StatelessWidget {
             ? AppButtonType.active
             : AppButtonType.inactive,
         title: "Confirm ",
-        onPressed: transactionCubit.addTransaction,
+        onPressed: transactionCubit.isTransactionValid
+            ? transactionCubit.addTransaction
+            : () {},
       ),
     );
   }
@@ -68,8 +70,9 @@ class AddTransactionCapture extends StatelessWidget {
           : Assets.icons.camera,
       action: cubit.isImageFileValid ? "Change" : "Capture",
       onTap: () {
-        context.router.push(const CameraRoute());
         context.read<CameraCubit>().initializeCamera();
+
+        context.router.push(const CameraRoute());
       },
     );
   }

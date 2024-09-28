@@ -1,5 +1,5 @@
 import 'package:auto_route/annotations.dart';
-import 'package:design_system/app_icon.dart';
+import 'package:bnbl/feature/presentation/success_view/success_screen_body.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -18,17 +18,11 @@ class SuccessScreen extends StatelessWidget {
           children: [
             AppIcon(Assets.icons.done),
             const Gap(40),
-            Text("Transaction documented successfully",
-                textAlign: TextAlign.center, style: context.textTheme.headline),
+            const SuccessHeadline(),
             const Gap(10),
-            Text("your transaction is documented ",
-                style: context.textTheme.body
-                    .copyWith(color: context.colors.captionColor)),
+            const SuccessCaptionText(),
             const Gap(40),
-            const AppButton(
-              type: AppButtonType.active,
-              title: "Go to home",
-            )
+            const GoToHomeButton()
           ],
         ),
       ),

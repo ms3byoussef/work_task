@@ -1,5 +1,5 @@
 import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_cubit.dart';
-import 'package:bnbl/feature/presentation/transaction_details_view/transaction_text.dart';
+import 'package:bnbl/feature/presentation/transaction_details_view/widgets/transaction_text.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

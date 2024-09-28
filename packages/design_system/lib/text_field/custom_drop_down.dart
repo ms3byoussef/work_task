@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable, avoid_print
 
-import 'package:design_system/app_icon.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 

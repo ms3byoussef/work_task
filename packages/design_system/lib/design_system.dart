@@ -1,5 +1,6 @@
 library design_system;
 
+export 'package:design_system/app_icon.dart';
 export 'package:design_system/app_text.dart';
 export 'package:design_system/buttons/app_button.dart';
 export 'package:design_system/extentions/size_utils.dart';

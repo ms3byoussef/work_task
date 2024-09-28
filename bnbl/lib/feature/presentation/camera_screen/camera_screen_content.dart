@@ -1,11 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bnbl/feature/presentation/camera_screen/cubit/camera_cubit.dart';
 import 'package:camera/camera.dart';
-import 'package:design_system/app_icon.dart';
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 
 class CameraScreenContent extends StatefulWidget {
   final CameraController controller;
@@ -30,7 +28,7 @@ class _CameraScreenContentState extends State<CameraScreenContent> {
           children: [
             Expanded(
               flex: 5,
-              child: CameraPreview(widget.controller),
+              child: CameraPreview(cubit.controller!),
             ),
             Expanded(
               flex: 1,
@@ -40,20 +38,9 @@ class _CameraScreenContentState extends State<CameraScreenContent> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        context.maybePop();
-                      },
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                    Gap(100.rw),
-                    IconButton(
-                      onPressed: cubit.switchCamera,
-                      icon: AppIcon(Assets.icons.switchCamera),
-                    ),
+                    const CancelButton(),
+                    TakePhotoButton(cubit: cubit),
+                    SwitchCameraButton(cubit: cubit),
                   ],
                 ),
               ),
@@ -63,39 +50,104 @@ class _CameraScreenContentState extends State<CameraScreenContent> {
         Positioned(
           top: 40,
           left: 20,
-          child: IconButton(
-            onPressed: () {
-              // Flashlight control
-              widget.controller.setFlashMode(FlashMode.torch);
-            },
-            icon: const Icon(Icons.flash_on, color: Colors.white),
-          ),
-        ),
-        Positioned(
-          bottom: 20,
-          left: 0,
-          right: 0,
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  cubit.takePicture();
-                },
-                child: Container(
-                  height: 70,
-                  width: 70,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: AppIcon(Assets.icons.takePhoto),
-                ),
-              ),
-              const Gap(20),
-            ],
-          ),
+          child: FlashButton(cubit: cubit),
         ),
       ],
+    );
+  }
+}
+
+class FlashButton extends StatefulWidget {
+  const FlashButton({
+    super.key,
+    required this.cubit,
+  });
+  final CameraCubit cubit;
+
+  @override
+  State<FlashButton> createState() => _FlashButtonState();
+}
+
+class _FlashButtonState extends State<FlashButton> {
+  bool _flashOn = false;
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        // Flashlight control
+
+        _flashOn == false
+            ? widget.cubit.setFlashOff()
+            : widget.cubit.setFlashOn();
+
+        setState(() {
+          _flashOn = !_flashOn;
+        });
+      },
+      icon: const Icon(Icons.flash_on, color: Colors.white),
+    );
+  }
+}
+
+class TakePhotoButton extends StatelessWidget {
+  const TakePhotoButton({
+    super.key,
+    required this.cubit,
+  });
+
+  final CameraCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        cubit.takePicture();
+      },
+      child: Container(
+        height: 70,
+        width: 70,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: AppIcon(Assets.icons.takePhoto),
+      ),
+    );
+  }
+}
+
+class SwitchCameraButton extends StatelessWidget {
+  const SwitchCameraButton({
+    super.key,
+    required this.cubit,
+  });
+
+  final CameraCubit cubit;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: cubit.switchCamera,
+      icon: AppIcon(Assets.icons.switchCamera),
+    );
+  }
+}
+
+class CancelButton extends StatelessWidget {
+  const CancelButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.maybePop();
+      },
+      child: const Text(
+        'Cancel',
+        style: TextStyle(color: Colors.white, fontSize: 16),
+      ),
     );
   }
 }
