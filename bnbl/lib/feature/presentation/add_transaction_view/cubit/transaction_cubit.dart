@@ -35,33 +35,15 @@ class TransactionCubit extends Cubit<TransactionState> {
   addTransaction() async {
     emit(const TransactionState.transactionLoading());
 
-    print("&&&&&&&&&&&&***${imageFile?.path}");
+    // print("____________---------------------${imageFile?.path}");
     final response = await _addTransactionUseCase(
         vendorVatNum: transactionModel.refNumber!,
         amount: transactionModel.amount!,
         date: transactionModel.date!,
         image: imageFile!);
-    // print(transactionModel.image?.toString());
     response.fold(
       (error) => emit(TransactionState.transactionError(error)),
       (response) => emit(const TransactionState.transactionSuccessfully()),
     );
   }
-
-  // uploadImage(
-  //   File fileResult,
-  // ) async {
-  //   emit(const TransactionState.uploadingImage());
-  //   final image = await uploadFile(
-  //     fileResult,
-  //     _fileManager,
-  //     filename: fileResult.path.split('/').last,
-  //   );
-
-  //   if (image != null) {
-  //     imageFile = image;
-  //   }
-
-  //   emit(TransactionState.uploadImageSuccess(image));
-  // }
 }

@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:bnbl/feature/data/models/receipt_model.dart';
 import 'package:bnbl/feature/presentation/scanner_view/cubit/scanner_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
@@ -23,10 +24,10 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
     dataCode = null;
     try {
-      controller.stopCamera();
       controller.scannedDataStream.listen((scanData) {
         _handleScan(scanData.code);
       });
+      controller.stopCamera();
     } catch (e) {
       emit(QRScannerState.qRScannerError(e.toString()));
     }
@@ -34,7 +35,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
   void _handleScan(String? scannedCode) {
     if (scannedCode != null) {
-      print("************** Scanned Code: $scannedCode ***************");
+      debugPrint("************** Scanned Code: $scannedCode ***************");
       decodeAndParseReceipt(scannedCode);
       dataCode = scannedCode;
       emit(QRScannerState.qRScannerSuccess(dataCode));
@@ -46,7 +47,7 @@ class QRScannerCubit extends Cubit<QRScannerState> {
   }
 
   void decodeAndParseReceipt(String base64String) async {
-    emit(const QRScannerState.qRScannerLoading()); // Emit loading state
+    emit(const QRScannerState.qRScannerLoading());
     try {
       final decodedString = utf8.decode(base64.decode(base64String));
       // final regex = RegExp(r'%\d{2}#?|%0f|%03|%14|%04|%05');
@@ -57,34 +58,26 @@ class QRScannerCubit extends Cubit<QRScannerState> {
 
       final filteredParts = lines.where((part) => part.isNotEmpty).toList();
 
-      print("######################$lines");
-      print("filteredParts######################$filteredParts");
+      debugPrint("-------------------------------$lines");
+      debugPrint("filteredParts-------------------$filteredParts");
 
       final String merchantName = filteredParts[0].trim();
-      print("merchantName : $merchantName");
+      // print("merchantName : $merchantName");
 
       final String refNumber = filteredParts[1].trim();
-      print("refNumber : $refNumber");
+      // print("refNumber : $refNumber");
 
       final DateTime paymentTime =
           DateTime.tryParse(filteredParts[2].trim()) ?? DateTime.now();
-      print("paymentTime : $paymentTime");
+      // print("paymentTime : $paymentTime");
       String paymentTimeFormatted =
           DateFormat('yyyy-MM-dd kk:mm:ss').format(paymentTime);
 
       final double cost = double.tryParse(filteredParts[3].trim()) ?? 0.0;
-      print("cost : $cost");
+      // print("cost : $cost");
 
       final double fees = double.tryParse(filteredParts[4].trim()) ?? 0.0;
-      print("fees : $fees");
-
-      // if (lines.length < 5) {
-      //   print(
-      //       "Error: Decoded string does not have the correct number of lines");
-      //   emit(const QRScannerState.qRScannerError(
-      //       'Invalid receipt format: Less than 5 lines'));
-      //   return;
-      // }
+      // print("fees : $fees");
 
       if (merchantName.isEmpty || refNumber.isEmpty) {
         print("Error: Critical fields are empty");
@@ -110,7 +103,6 @@ class QRScannerCubit extends Cubit<QRScannerState> {
   }
 
   void resetScanner() {
-    // controller?.dispose(
     dataCode = null;
     if (controller != null) {
       controller!.resumeCamera();
